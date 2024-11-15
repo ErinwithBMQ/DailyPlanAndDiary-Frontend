@@ -17,6 +17,6 @@ git clone 到本地后，先运行 `npm install`
 
 `src/components/css` 文件夹下存放各个组件对应的样式文件。其实用 tailwind 的话就不太需要自己写样式了
 
-`App.tsx` 配置了动态路由，有新的页面就加一个路由
+`App.jsx` 配置了动态路由，有新的页面就加一个路由
 
-`main.tsx` 是整个页面的入口
+`main.jsx` 是整个页面的入口
