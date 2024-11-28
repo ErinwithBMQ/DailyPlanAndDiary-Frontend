@@ -6,7 +6,11 @@ function MainPage() {
             <div className={"text-2xl"}>This is the main page</div>
             <button onClick={() => {
                 window.location.href = `/diary`;
-            }}>enter
+            }}>diary
+            </button>
+            <button onClick={() => {
+                window.location.href = `/calendar`;
+            }}>calendar
             </button>
         </div>
     )
