@@ -1,15 +1,20 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './css/calendar.css'
 import Pikaday from 'pikaday'
 import 'pikaday/css/pikaday.css'
 
 function calendar() {
     const pikadayRef = useRef(null)
-
+    const [date, setDate] = useState('')
     useEffect(() => {
         const picker = new Pikaday({
             field: pikadayRef.current,
+            bound: false,
+            container: pikadayRef.current,
             format: 'YYYY-MM-DD',
+            onSelect: () => {
+                setDate(picker.toString());
+            }
         });
 
         return () => {
@@ -19,8 +24,10 @@ function calendar() {
 
     return (
         <div>
-            {/* <div className={"text-2xl"}>Calendar</div> */}
-            <input className='calendar' type="text" ref={pikadayRef} placeholder='Select a date' />
+            <div className="calendar" ref={pikadayRef}></div>
+                <div className="selected-date">
+                    Selected Date: {date}
+                </div>
         </div>
     )
 }
