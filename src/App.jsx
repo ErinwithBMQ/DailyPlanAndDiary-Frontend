@@ -2,7 +2,6 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import MainPage from "./components/mainPage.jsx";
 import Diary from "./components/diary.jsx";
 import Calendar from "./components/calendar.jsx";
-
 // 动态路由
 
 function App() {
