@@ -1,6 +1,9 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+}
+
+.login-page {
     background: linear-gradient(to right, #ebd8ff, #ccdfff);
     height: 100vh;
     display: flex;
