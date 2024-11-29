@@ -1,10 +1,68 @@
 .calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-    gap: 1px;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    border: 1px solid #000;
+    width: 50%;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 修改 Pikaday 日历的背景颜色 */
+.pika-single {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%; /* 设置日历的宽度 */
+    height: auto; /* 设置日历的高度 */
+}
+
+/* 修改选中日期的背景颜色和字体颜色 */
+.pika-single .pika-table .is-selected {
+    background: #007bff;
+    color: white;
+}
+
+/* 修改今天日期的边框颜色 */
+.pika-single .pika-table .is-today {
+    border: 1px solid #007bff;
+}
+
+/* 修改星期标题的背景颜色和字体颜色 */
+.pika-single .pika-lendar th {
+    background: black;
+    color: white;
+    padding: 5px;
+}
+
+/* 修改日期单元格的样式 */
+.pika-single .pika-table td {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.pika-single .pika-table td:hover {
+    background: #f0f0f0;
+}
+
+.pika-single .pika-title {
+    text-align: center; /* 水平居中 */
+    padding: 10px 0; /* 添加上下内边距 */
+    font-weight: bold; /* 加粗字体 */
+    left: 120px; /* 设置标题的位置 */
+}
+
+.pika-single .pika-table {
+    width: 500px;
+    height: 400px;
+}
+
+.selected-date {
+    font-size: 20px;
+    font-weight: bold;
+    width: 40%;
+    height: auto;
+    margin-top: 10px;
+    position: relative;
+    top: -450px;
+    left: 650px;
 }
