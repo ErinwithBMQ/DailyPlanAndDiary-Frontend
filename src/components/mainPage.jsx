@@ -1,4 +1,5 @@
 import './css/mainPage.css'
+import React from "react";
 
 function MainPage() {
     return (
@@ -11,6 +12,10 @@ function MainPage() {
             <button onClick={() => {
                 window.location.href = `/calendar`;
             }}>calendar
+            </button>
+            <button onClick={() => {
+                window.location.href = `/plan`;
+            }}>plan
             </button>
         </div>
     )
