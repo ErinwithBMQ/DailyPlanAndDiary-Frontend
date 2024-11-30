@@ -11,6 +11,7 @@ function Login() {
 
     return (
         <div className="login-page">
+            <button className="backBegin-button" onClick={() => window.location.href = `/`}>取消登录</button>
             <div className="login-container">
                 {!showRegister ? (
                     <div className="login-form">
