@@ -67,7 +67,7 @@ function Plan() {
                         value={ddl}
                         onChange={(e) => setDdl(e.target.value)} // 更新状态
                     />
-                    <button className= "creation-button" onClick={handleCreatePlan}>创建计划</button>
+                    <button className="creation-button" onClick={handleCreatePlan}>创建计划</button>
                 </div>
             </div>
 
