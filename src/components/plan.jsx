@@ -2,6 +2,7 @@ import './css/plan.css'
 import './css/diary.css'
 import React, {useState} from "react";
 
+
 function Plan() {
     //存储输入的计划和展示列表
     const [planName, setPlanName] = useState("");
