@@ -1,0 +1,94 @@
+.shell {
+    position: fixed; /* 确保菜单固定在顶部 */
+    top: 0;
+    left: 0;
+    right: 0; /* 使用左右边界以扩展到整个宽度 */
+    display: flex; /* 保持弹性布局 */
+    justify-content: space-around; /* 均匀分布菜单项 */
+    align-items: center; /* 垂直居中 */
+    background-color: #f49d1d; /* 背景颜色 */
+    height: 65px; /* 固定高度 */
+    z-index: 1000000; /* 确保在其他元素之上 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 18px;
+    color: #f4f1de;
+}
+
+.button0 {
+    background-color: #f49d1d;
+    width: 100%;
+    max-width: 170px; /* 在大屏幕上限制最大宽度 */
+    flex: 1; /* 灵活伸缩，以适应不同的屏幕尺寸 */
+    height: 65px;
+    text-align: center;
+    line-height: 65px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.information {
+    width: 100%;
+    top: 65px;
+    background-color: #ebc081;
+    transform: translate(-20px, -200px);
+    border-radius: 10px;
+    padding: 20px 0;
+    line-height: 0;
+    height: 0;
+    transition: .3s;
+    opacity: 0;
+}
+
+.button0:hover {
+    background-color: #ffac3e;
+}
+
+.button0 li:hover {
+    background-color: #eda342;
+}
+
+.button0 ul li {
+    height: 0;
+    transition: .2s;
+    opacity: 0;
+    transform: translateY(-65px);
+    background-color: #f6bc79;
+}
+
+.button0:hover li {
+    height: 65px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.portrait:hover .information {
+    opacity: 1;
+    line-height: 65px;
+    transform: translate(-20px, -10px);
+    height: auto;
+}
+
+.por1 {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #fff;
+}
+
+.por1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.username-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff; /* 根据你的设计调整颜色 */
+    font-size: 20px; /* 根据你的设计调整字体大小 */
+    text-shadow: 2px 2px 4px rgba(255, 251, 17, 0.5);
+}

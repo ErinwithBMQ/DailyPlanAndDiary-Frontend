@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import './css/calendar.css'
 import Pikaday from 'pikaday'
 import 'pikaday/css/pikaday.css'
+import Menu from "./menu.jsx";
 
 function calendar() {
     const pikadayRef = useRef(null)
@@ -24,10 +25,6 @@ function calendar() {
 
     return (
         <div className="calendar-page">
-            <div className="main-navbar">
-                <h1 className="main-navbar-title">Daily Plan And Diary</h1>
-                <button className="backLog-button" onClick={() => window.location.href = `/`}>退出登录</button>
-            </div>
             <div className="calendar-container">
                 <div className="calendar" ref={pikadayRef}></div>
             </div>
@@ -38,6 +35,7 @@ function calendar() {
                 <button className="todiary-button" onClick={() => window.location.href = `/diary`}>日记</button>
                 <button className="toplan-button" onClick={() => window.location.href = `/plan`}>计划</button>
             </div>
+            <Menu/>
         </div>
     )
 }
