@@ -1,5 +1,6 @@
 import './css/diary.css'
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
+import axiosInstance from "../../axios.config.js";
 
 function Diary() {
     const [diaryTitle, setDiaryTitle] = useState("");
@@ -9,7 +10,7 @@ function Diary() {
     const [selectedDiary, setSelectedDiary] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
 
-    const handleCreateDiary = () => {
+    const handleCreateDiary = async() => {
         if (!diaryTitle || !diaryContent) {
             setErrorMessage("标题或内容不能为空，创建日记失败");
             return;
@@ -18,16 +19,47 @@ function Diary() {
         const newDiary = {
             title: diaryTitle,
             content: diaryContent,
+            created_at: new Date().toLocaleDateString(),
+            author: "admin",
         };
-
-        setDiaries([...diaries, newDiary]);
-
-        setDiaryTitle("");
-        setDiaryContent("");
+        try {
+            const response = await axiosInstance.post('http://127.0.0.1:7001/diary/create_diary', {
+                title: diaryTitle,
+                content: diaryContent,
+                createdAt: new Date().toLocaleDateString(),
+                author: "admin",
+            });
+            console.log("日记成功创建");
+            alert('你已经成功创建日记!');
+        } catch (error) {
+            console.error(error);
+            alert('创建失败。出现问题。');
+        }
+        // setDiaries([...diaries, newDiary]);
         setShowCreation(false);
-        setErrorMessage("");
+        getDiaries();
     };
 
+    const getDiaries = async () => {
+        // if (localStorage.getItem('token') == null) {
+        //     setErrorMessage("还未登录，请先登录");
+        //     return;
+        // }
+
+        try {
+            const response = await axiosInstance.get('http://127.0.0.1:7001/diary/show_diary', {
+                headers: {
+                    Authorization: `Bearer ${'admin'}`,
+                },
+            });
+            setDiaries(response.data);
+        }
+        catch (error) {
+            console.error(error);
+            alert('获取日记失败。出现问题。');
+        }
+    };
+            
     const handleViewDiary = (diary) => {
         setSelectedDiary(diary);
         setShowCreation(false);
@@ -38,6 +70,10 @@ function Diary() {
             setDiaryTitle(e.target.value);
         }
     };
+
+    useEffect(() => {
+        getDiaries();
+    }, []);
 
     return (
         <div className="diary-page">
