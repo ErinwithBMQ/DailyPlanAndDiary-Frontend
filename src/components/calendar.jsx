@@ -24,7 +24,10 @@ function calendar() {
 
     return (
         <div className="calendar-page">
-            <button className="backMain-button" onClick={() => window.location.href = `/mainPage`}>返回</button>
+            <div className="main-navbar">
+                <h1 className="main-navbar-title">Daily Plan And Diary</h1>
+                <button className="backLog-button" onClick={() => window.location.href = `/`}>退出登录</button>
+            </div>
             <div className="calendar-container">
                 <div className="calendar" ref={pikadayRef}></div>
             </div>

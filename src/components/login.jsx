@@ -33,7 +33,7 @@ function Login() {
                     alert('你已经成功登录!');
                     console.log(response2.data);
                     localStorage.setItem('token', response2.data.token);
-                    window.location.href = `/mainPage`;
+                    window.location.href = `/calendar`;
                 } else {
                     console.log("密码错误");
                     alert('密码错误。');
@@ -92,7 +92,7 @@ function Login() {
             console.log(response.data.username, "用户成功创建");
             alert('你已经成功创建用户!');
             setShowRegister(false);
-            window.location.href = `/mainPage`;
+            window.location.href = `/calendar`;
         } catch (error) {
             console.error(error);
             alert('创建失败。');

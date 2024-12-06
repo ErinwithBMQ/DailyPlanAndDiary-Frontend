@@ -48,7 +48,7 @@ function Plan() {
 
     return (
         <div className="plan-page">
-            <button className="backMain-button" onClick={() => window.location.href = `/mainPage`}>返回</button>
+            <button className="backMain-button" onClick={() => window.location.href = `/calendar`}>返回</button>
 
             <div className="plan-creation-container">
                 <div className="plan-creation">
