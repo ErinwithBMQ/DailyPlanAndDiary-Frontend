@@ -1,6 +1,7 @@
 import './css/diary.css'
-import React, { useState , useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import axiosInstance from "../../axios.config.js";
+import UserLogin from "./jwt.jsx";
 
 function Diary() {
     const [diaryTitle, setDiaryTitle] = useState("");
@@ -10,7 +11,7 @@ function Diary() {
     const [selectedDiary, setSelectedDiary] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
 
-    const handleCreateDiary = async() => {
+    const handleCreateDiary = async () => {
         if (!diaryTitle || !diaryContent) {
             setErrorMessage("标题或内容不能为空，创建日记失败");
             return;
@@ -41,11 +42,6 @@ function Diary() {
     };
 
     const getDiaries = async () => {
-        // if (localStorage.getItem('token') == null) {
-        //     setErrorMessage("还未登录，请先登录");
-        //     return;
-        // }
-
         try {
             const response = await axiosInstance.get('http://127.0.0.1:7001/diary/show_diary', {
                 headers: {
@@ -53,13 +49,12 @@ function Diary() {
                 },
             });
             setDiaries(response.data);
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
             alert('获取日记失败。出现问题。');
         }
     };
-            
+
     const handleViewDiary = (diary) => {
         setSelectedDiary(diary);
         setShowCreation(false);
@@ -77,6 +72,7 @@ function Diary() {
 
     return (
         <div className="diary-page">
+            <UserLogin/>
             <button className="backMain-button" onClick={() => window.location.href = `/calendar`}>返回</button>
             <div className="diary-container">
                 <div className="diary-list">
@@ -87,7 +83,8 @@ function Diary() {
                             diaries.map((diary, index) => (
                                 <div key={index} className="diary-item">
                                     <p><strong>标题：</strong>{diary.title}</p>
-                                    <button className="view-button" onClick={() => handleViewDiary(diary)}>查看详情</button>
+                                    <button className="view-button" onClick={() => handleViewDiary(diary)}>查看详情
+                                    </button>
                                 </div>
                             ))
                         ) : (
