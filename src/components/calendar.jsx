@@ -23,11 +23,18 @@ function calendar() {
     }, []);
 
     return (
-        <div>
-            <div className="calendar" ref={pikadayRef}></div>
-                <div className="selected-date">
-                    Selected Date: {date}
-                </div>
+        <div className="calendar-page">
+            <button className="backMain-button" onClick={() => window.location.href = `/mainPage`}>返回</button>
+            <div className="calendar-container">
+                <div className="calendar" ref={pikadayRef}></div>
+            </div>
+            <div className="selected-date">
+                Selected Date: {date}
+            </div>
+            <div className="tobutton-container">
+                <button className="todiary-button" onClick={() => window.location.href = `/diary`}>日记</button>
+                <button className="toplan-button" onClick={() => window.location.href = `/plan`}>计划</button>
+            </div>
         </div>
     )
 }

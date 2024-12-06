@@ -1,9 +1,29 @@
-.calendar {
-    width: 50%;
+.calendar-page {
+    background: linear-gradient(to right, #ffecd2, #ffac91);
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    height: 100vh;
+}
+
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+    margin-left: -600px;
+    width: 40%;
     background-color: #f9f9f9;
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.calendar {
+    width: 100%;
 }
 
 /* 修改 Pikaday 日历的背景颜色 */
@@ -48,7 +68,7 @@
     text-align: center; /* 水平居中 */
     padding: 10px 0; /* 添加上下内边距 */
     font-weight: bold; /* 加粗字体 */
-    left: 120px; /* 设置标题的位置 */
+    left: 50%;
 }
 
 .pika-single .pika-table {
@@ -57,12 +77,43 @@
 }
 
 .selected-date {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
+    color: #fff3e9;
     width: 40%;
     height: auto;
     margin-top: 10px;
     position: relative;
     top: -450px;
-    left: 650px;
+    left: 450px;
+}
+.tobutton-container {
+    position: absolute;
+    bottom: 300px;
+    right: 350px;
+    display: flex;
+    justify-content: center;
+}
+
+.todiary-button, .toplan-button {
+    font-size: 20px;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: #ffad84;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 0 10px;
+}
+
+.todiary-button:hover {
+    background-color: #ffe9c9;
+    border-color: #ffeacc;
+    transform: translateY(-3px);
+}
+.toplan-button:hover {
+    background-color: #ffe9c9;
+    border-color: #ffeacc;
+    transform: translateY(-3px);
 }
