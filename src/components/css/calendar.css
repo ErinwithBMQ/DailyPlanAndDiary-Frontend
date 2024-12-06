@@ -1,5 +1,5 @@
 .calendar-page {
-    background: linear-gradient(to right, #ffecd2, #ffac91);
+    background: linear-gradient(to right, #dfc1ff, #ffd898);
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
@@ -9,11 +9,50 @@
     height: 100vh;
 }
 
+.main-navbar {
+    width: 100%;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.main-navbar-title {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.backLog-button {
+    width: 100px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #ffa596;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.backLog-button:hover {
+    background-color: #e3c8c5;
+    transform: translateY(-3px);
+}
+
 .calendar-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 60px;
+    margin-top: 100px;
     margin-left: -600px;
     width: 40%;
     background-color: #f9f9f9;
@@ -97,10 +136,9 @@
 
 .todiary-button, .toplan-button {
     font-size: 20px;
-    border: 2px solid #ffffff;
     border-radius: 10px;
     padding: 10px 20px;
-    background-color: #ffad84;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -108,12 +146,12 @@
 }
 
 .todiary-button:hover {
-    background-color: #ffe9c9;
+    background: linear-gradient(to right, #feb47b, #ff7e5f);
     border-color: #ffeacc;
     transform: translateY(-3px);
 }
 .toplan-button:hover {
-    background-color: #ffe9c9;
+    background: linear-gradient(to right, #feb47b, #ff7e5f);
     border-color: #ffeacc;
     transform: translateY(-3px);
 }

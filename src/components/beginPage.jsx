@@ -15,7 +15,7 @@ function BeginPage() {
                     }}>登录/注册
                     </button>
                     <button onClick={() => {
-                        window.location.href = `/mainPage`;
+                        window.location.href = `/calendar`;
                     }}>使用指南
                     </button>
                 </div>

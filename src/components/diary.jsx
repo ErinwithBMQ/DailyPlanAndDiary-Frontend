@@ -41,7 +41,7 @@ function Diary() {
 
     return (
         <div className="diary-page">
-            <button className="backMain-button" onClick={() => window.location.href = `/mainPage`}>返回</button>
+            <button className="backMain-button" onClick={() => window.location.href = `/calendar`}>返回</button>
             <div className="diary-container">
                 <div className="diary-list">
                     <h2 className="diary-title">日记列表</h2>
