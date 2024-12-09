@@ -1,5 +1,5 @@
 import './css/diary.css'
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 function Diary() {
     const [diaryTitle, setDiaryTitle] = useState("");
@@ -8,6 +8,13 @@ function Diary() {
     const [showCreation, setShowCreation] = useState(false);
     const [selectedDiary, setSelectedDiary] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
+    const [selectedDate, setSelectedDate] = useState("");
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const date = params.get('date');
+        setSelectedDate(date);
+    }, []);
 
     const handleCreateDiary = () => {
         if (!diaryTitle || !diaryContent) {
@@ -42,6 +49,9 @@ function Diary() {
     return (
         <div className="diary-page">
             <button className="backMain-button" onClick={() => window.location.href = `/calendar`}>返回</button>
+            <div className="diary-selected-date">
+                Date: {selectedDate}
+            </div>
             <div className="diary-container">
                 <div className="diary-list">
                     <h2 className="diary-title">日记列表</h2>

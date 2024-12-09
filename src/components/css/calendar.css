@@ -118,13 +118,18 @@
 .selected-date {
     font-size: 30px;
     font-weight: bold;
-    color: #fff3e9;
-    width: 40%;
-    height: auto;
-    margin-top: 10px;
-    position: relative;
-    top: -450px;
-    left: 450px;
+    color: #b4c1ff;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+    margin-top: 200px;
+    position: absolute;
+    top: 20px;
+    right: 200px;
+    text-align: center;
+    width: fit-content;
 }
 .tobutton-container {
     position: absolute;

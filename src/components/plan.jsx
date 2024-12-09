@@ -1,5 +1,5 @@
 import './css/plan.css'
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 function Plan() {
     const [planName, setPlanName] = useState("");
@@ -8,6 +8,13 @@ function Plan() {
     const [ddl, setDdl] = useState("");
     const [plans, setPlans] = useState([]);
     const [selectedPlan, setSelectedPlan] = useState(null);
+    const [selectedDate, setSelectedDate] = useState("");
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const date = params.get('date');
+        setSelectedDate(date);
+    }, []);
 
     const handleCreatePlan = () => {
         if (!planName || !planContent || !emergency || !ddl) {
@@ -49,7 +56,9 @@ function Plan() {
     return (
         <div className="plan-page">
             <button className="backMain-button" onClick={() => window.location.href = `/calendar`}>返回</button>
-
+            <div className="plan-selected-date">
+                Date: {selectedDate}
+            </div>
             <div className="plan-creation-container">
                 <div className="plan-creation">
                     <h2 className="plan-title">添加计划</h2>
