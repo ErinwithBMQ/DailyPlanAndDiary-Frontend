@@ -23,6 +23,14 @@ function calendar() {
         };
     }, []);
 
+    const handleDataChoose = (path) => {
+        if (!date) {
+            alert("请选择日期");
+            return;
+        }
+        window.location.href = `${path}?date=${date}`;
+    };
+
     return (
         <div className="calendar-page">
             <div className="calendar-container">
@@ -32,8 +40,8 @@ function calendar() {
                 Selected Date: {date}
             </div>
             <div className="tobutton-container">
-                <button className="todiary-button" onClick={() => window.location.href = `/diary`}>日记</button>
-                <button className="toplan-button" onClick={() => window.location.href = `/plan`}>计划</button>
+                <button className="todiary-button" onClick={() => handleDataChoose(`/diary`)}>日记</button>
+                <button className="toplan-button" onClick={() => handleDataChoose(`/plan`)}>计划</button>
             </div>
             <Menu/>
         </div>

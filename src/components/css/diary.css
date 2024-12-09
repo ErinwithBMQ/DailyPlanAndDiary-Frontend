@@ -28,12 +28,25 @@
     transform: translateY(-3px);
 }
 
+.diary-selected-date {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #7f84ca;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: fit-content;
+}
+
 .diary-container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     width: 80%;
-    margin-top: 60px;
+    margin-top: 20px;
 }
 
 .diary-list, .diary-creation {
