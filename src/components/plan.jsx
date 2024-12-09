@@ -1,5 +1,6 @@
 import './css/plan.css'
-import React, { useState,useEffect } from "react";
+import React, {useState,useEffect} from "react";
+import UserLogin from "./jwt.jsx";
 
 function Plan() {
     const [planName, setPlanName] = useState("");
@@ -55,6 +56,7 @@ function Plan() {
 
     return (
         <div className="plan-page">
+            <UserLogin/>
             <button className="backMain-button" onClick={() => window.location.href = `/calendar`}>返回</button>
             <div className="plan-selected-date">
                 Date: {selectedDate}
@@ -109,7 +111,8 @@ function Plan() {
                         plans.map((plan, index) => (
                             <div key={index} className="plan-item">
                                 <p><strong>计划名称：</strong>{plan.name}</p>
-                                <button className="viewplan-button" onClick={() => handleViewPlan(plan)}>查看详情</button>
+                                <button className="viewplan-button" onClick={() => handleViewPlan(plan)}>查看详情
+                                </button>
                             </div>
                         ))
                     ) : (

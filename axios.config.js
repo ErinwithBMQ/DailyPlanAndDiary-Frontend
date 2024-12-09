@@ -30,7 +30,7 @@ axiosInstance.interceptors.response.use(
         if (error.response && error.response.status === 400 || error.response.status === 401) {
             // 如果响应状态码为400或401，则跳转到登录页面
             localStorage.removeItem('token');
-            window.location.href = '/';
+            window.location.href = `/login`;
             alert('您还未登录。')
         }
     }
