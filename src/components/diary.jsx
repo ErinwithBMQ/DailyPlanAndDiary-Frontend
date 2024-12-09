@@ -10,6 +10,13 @@ function Diary() {
     const [showCreation, setShowCreation] = useState(false);
     const [selectedDiary, setSelectedDiary] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
+    const [selectedDate, setSelectedDate] = useState("");
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const date = params.get('date');
+        setSelectedDate(date);
+    }, []);
 
     const handleCreateDiary = async () => {
         if (!diaryTitle || !diaryContent) {
@@ -74,6 +81,9 @@ function Diary() {
         <div className="diary-page">
             <UserLogin/>
             <button className="backMain-button" onClick={() => window.location.href = `/calendar`}>返回</button>
+            <div className="diary-selected-date">
+                Date: {selectedDate}
+            </div>
             <div className="diary-container">
                 <div className="diary-list">
                     <h2 className="diary-title">日记列表</h2>

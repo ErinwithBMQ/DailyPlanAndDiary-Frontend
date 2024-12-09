@@ -10,6 +10,13 @@ function Plan() {
     const [ddl, setDdl] = useState("");
     const [plans, setPlans] = useState([]);
     const [selectedPlan, setSelectedPlan] = useState(null);
+    const [selectedDate, setSelectedDate] = useState("");
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const date = params.get('date');
+        setSelectedDate(date);
+    }, []);
 
     const handleCreatePlan = async() => {
         if (!planName || !planContent || !emergency || !ddl) {
@@ -82,9 +89,11 @@ function Plan() {
 
     return (
         <div className="plan-page">
-            <UserLogin/>
+            <UserLogin />
             <button className="backMain-button" onClick={() => window.location.href = `/calendar`}>返回</button>
-
+            <div className="plan-selected-date">
+                Date: {selectedDate}
+            </div>
             <div className="plan-creation-container">
                 <div className="plan-creation">
                     <h2 className="plan-title">添加计划</h2>
@@ -105,14 +114,20 @@ function Plan() {
                         value={planContent}
                         onChange={(e) => setPlanContent(e.target.value)}
                     />
-                    <input
-                        type="text"
-                        id="emergency"
-                        name="emergency"
-                        placeholder="紧急程度"
-                        value={emergency}
-                        onChange={(e) => setEmergency(e.target.value)}
-                    />
+                    <div className="emergency-input-container">
+                        <select
+                            id="emergency"
+                            name="emergency"
+                            value={emergency}
+                            onChange={(e) => setEmergency(e.target.value)}
+                        >
+                            <option value="">选择紧急程度</option>
+                            <option value="重要且紧急">重要且紧急</option>
+                            <option value="重要不紧急">重要不紧急</option>
+                            <option value="紧急不重要">紧急不重要</option>
+                            <option value="不重要不紧急">不重要不紧急</option>
+                        </select>
+                    </div>
                     <div className="ddl-input-container">
                         <input
                             type="text"
