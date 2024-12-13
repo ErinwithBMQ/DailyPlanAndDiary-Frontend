@@ -18,6 +18,11 @@ function calendar() {
             }
         });
 
+        // 设置默认日期为今天
+        const today = new Date();
+        picker.setDate(today);
+        setDate(picker.toString());
+
         return () => {
             picker.destroy();
         };

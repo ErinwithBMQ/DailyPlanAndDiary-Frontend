@@ -68,6 +68,10 @@ function Plan() {
         setSelectedPlan(plan);
     };
 
+    const handleCloseDetails = () => {
+        setSelectedPlan(null);
+    };
+
     const getPlans = async () => {
         try {
             const response = await axiosInstance.get('http://127.0.0.1:7001/plan/show_plan', {
@@ -94,68 +98,83 @@ function Plan() {
             <div className="plan-selected-date">
                 Date: {selectedDate}
             </div>
-            <div className="plan-creation-container">
-                <div className="plan-creation">
-                    <h2 className="plan-title">添加计划</h2>
-                    <div className="title-input-container">
-                        <input
-                            type="text"
-                            id="plan_name"
-                            name="plan_name"
-                            placeholder="计划名称"
-                            value={planName}
-                            onChange={handlePlanNameChange}
-                        />
-                        <span className="title-counter">{planName.length}/15</span>
-                    </div>
-                    <textarea
-                        className="plan-content-textarea"
-                        placeholder="计划内容"
-                        value={planContent}
-                        onChange={(e) => setPlanContent(e.target.value)}
-                    />
-                    <div className="emergency-input-container">
-                        <select
-                            id="emergency"
-                            name="emergency"
-                            value={emergency}
-                            onChange={(e) => setEmergency(e.target.value)}
-                        >
-                            <option value="">选择紧急程度</option>
-                            <option value="重要且紧急">重要且紧急</option>
-                            <option value="重要不紧急">重要不紧急</option>
-                            <option value="紧急不重要">紧急不重要</option>
-                            <option value="不重要不紧急">不重要不紧急</option>
-                        </select>
-                    </div>
-                    <div className="ddl-input-container">
-                        <input
-                            type="text"
-                            id="ddl"
-                            name="ddl"
-                            placeholder="ddl"
-                            value={ddl}
-                            onChange={handleDdlChange}
-                        />
-                        <span className="ddl-counter">{ddl.length}/15</span>
-                    </div>
-                    <button className="creation-button" onClick={handleCreatePlan}>创建计划</button>
-                </div>
-            </div>
-
-            <div className="plan-list-container">
+            <div className="plan-container">
                 <div className="plan-list">
                     <h2 className="plan-title">计划列表</h2>
-                    {plans.length > 0 ? (
-                        plans.map((plan, index) => (
-                            <div key={index} className="plan-item">
-                                <p><strong>计划名称：</strong>{plan.name}</p>
-                                <button className="viewplan-button" onClick={() => handleViewPlan(plan)}>查看详情
-                                </button>
+                    <button className="createPlan-button" onClick={() => setSelectedPlan(null)}>创建计划</button>
+                    <div className="plan-list-content">
+                        {plans.length > 0 ? (
+                            plans.map((plan, index) => (
+                                <div key={index} className="plan-item">
+                                    <p><strong>计划名称：</strong>{plan.name}</p>
+                                    <button className="viewplan-button" onClick={() => handleViewPlan(plan)}>查看详情</button>
+                                </div>
+                            ))
+                        ) : (
+                            <p>暂无计划，创建一个吧！</p>
+                        )}
+                    </div>
+                </div>
+                <div className="plan-creation">
+                    {selectedPlan ? (
+                        <>
+                            <h2 className="plan-title">计划详情</h2>
+                            <p><strong>计划名称：</strong>{selectedPlan.name}</p>
+                            <div className="plan-content-container">
+                                <p className="plan-content-title"><strong>计划内容：</strong></p>
+                                <p className="plan-content">{selectedPlan.content}</p>
                             </div>
-                        ))
+                            <p><strong>紧急程度：</strong>{selectedPlan.emergency}</p>
+                            <p><strong>DDL：</strong>{selectedPlan.ddl}</p>
+                            <button className="close-details-button" onClick={handleCloseDetails}>返回</button>
+                        </>
                     ) : (
-                        <p>暂无计划，创建一个吧！</p>
+                        <>
+                            <h2 className="plan-title">添加计划</h2>
+                            <div className="title-input-container">
+                                <input
+                                    type="text"
+                                    id="plan_name"
+                                    name="plan_name"
+                                    placeholder="计划名称"
+                                    value={planName}
+                                    onChange={handlePlanNameChange}
+                                />
+                                <span className="title-counter">{planName.length}/15</span>
+                            </div>
+                            <textarea
+                                className="plan-content-textarea"
+                                placeholder="计划内容"
+                                value={planContent}
+                                onChange={(e) => setPlanContent(e.target.value)}
+                            />
+                            <div className="emergency-input-container">
+                                <select
+                                    id="emergency"
+                                    name="emergency"
+                                    value={emergency}
+                                    onChange={(e) => setEmergency(e.target.value)}
+                                >
+                                    <option value="">选择紧急程度</option>
+                                    <option value="重要且紧急">重要且紧急</option>
+                                    <option value="重要不紧急">重要不紧急</option>
+                                    <option value="紧急不重要">紧急不重要</option>
+                                    <option value="不重要不紧急">不重要不紧急</option>
+                                </select>
+                            </div>
+                            <div className="ddl-input-container">
+                                <input
+                                    type="text"
+                                    id="ddl"
+                                    name="ddl"
+                                    placeholder="ddl"
+                                    value={ddl}
+                                    onChange={handleDdlChange}
+                                />
+                                <span className="ddl-counter">{ddl.length}/15</span>
+                            </div>
+                            <button className="creation-button" onClick={handleCreatePlan}>创建计划</button>
+                        </>
                     )}
                 </div>
                 {selectedPlan && (
