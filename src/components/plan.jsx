@@ -1,5 +1,6 @@
 import './css/plan.css'
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
+import axiosInstance from "../../axios.config.js";
 import UserLogin from "./jwt.jsx";
 
 function Plan() {
@@ -17,7 +18,7 @@ function Plan() {
         setSelectedDate(date);
     }, []);
 
-    const handleCreatePlan = () => {
+    const handleCreatePlan = async() => {
         if (!planName || !planContent || !emergency || !ddl) {
             alert("所有字段均为必填项！");
             return;
@@ -29,9 +30,22 @@ function Plan() {
             emergency,
             ddl,
         };
+        try {
+            const response = await axiosInstance.post('http://127.0.0.1:7001/plan/create_plan', {
+                title: planName,
+                content: planContent,
+                importance: emergency,
+                deadLineTime: ddl,
+                author: "admin",
+            });
+            console.log("计划成功创建");
+            alert('你已经成功创建计划!');
+        }catch (error) {
+            console.error(error);
+            alert('创建失败。出现问题。');
+        }
 
-        setPlans([...plans, newPlan]);
-
+        getPlans();
         setPlanName("");
         setPlanContent("");
         setEmergency("");
@@ -57,6 +71,25 @@ function Plan() {
     const handleCloseDetails = () => {
         setSelectedPlan(null);
     };
+
+    const getPlans = async () => {
+        try {
+            const response = await axiosInstance.get('http://127.0.0.1:7001/plan/show_plan', {
+                headers: {
+                    Authorization: `Bearer ${'admin'}`,
+                },
+            });
+            console.log(response.data);
+            setPlans(response.data);
+        } catch (error) {
+            console.error(error);
+            alert('获取日记失败。出现问题。');
+        }
+    };
+
+    useEffect(() => {
+        getPlans();
+    }, []);
 
     return (
         <div className="plan-page">
@@ -144,6 +177,16 @@ function Plan() {
                         </>
                     )}
                 </div>
+                {selectedPlan && (
+                    <div className="plan-details">
+                        <h2 className="plan-title">计划详情</h2>
+                        <p><strong>计划名称：</strong>{selectedPlan.title}</p>
+                        <p><strong>计划内容：</strong></p>
+                        <div className="plan-content">{selectedPlan.content}</div>
+                        <p><strong>紧急程度：</strong>{selectedPlan.importance}</p>
+                        <p><strong>DDL：</strong>{selectedPlan.deadLineTime}</p>
+                    </div>
+                )}
             </div>
         </div>
     );
