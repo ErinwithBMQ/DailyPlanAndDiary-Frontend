@@ -15,7 +15,7 @@ function Login() {
             return;
         }
         try {
-            const response = await axiosInstance.get('http://127.0.0.1:7001/user/find_user', {
+            const response = await axiosInstance.get('/user/find_user', {
                 params: {
                     username,
                 },
@@ -25,7 +25,7 @@ function Login() {
 
             if (response.data !== false) {
                 console.log(response.data, "检测到用户信息");
-                const response2 = await axiosInstance.post('http://127.0.0.1:7001/user/password', {
+                const response2 = await axiosInstance.post('/user/password', {
                     username,
                     password,
                 });
@@ -59,7 +59,7 @@ function Login() {
         console.log(username, password);
 
         try {
-            const response = await axiosInstance.get('http://127.0.0.1:7001/user/find_user', {
+            const response = await axiosInstance.get('/user/find_user', {
                 params: {
                     username,
                 },
@@ -85,12 +85,18 @@ function Login() {
         }
 
         try {
-            const response = await axiosInstance.post('http://127.0.0.1:7001/user/create_user', {
+            const response = await axiosInstance.post('/user/create_user', {
                 username,
                 password,
             });
             console.log(response.data.username, "用户成功创建");
             alert('你已经成功创建用户!');
+            const response2 = await axiosInstance.post('/user/password', {
+                username,
+                password,
+            });
+            console.log(response2.data);
+            localStorage.setItem('token', response2.data.token);
             setShowRegister(false);
             window.location.href = `/calendar`;
         } catch (error) {

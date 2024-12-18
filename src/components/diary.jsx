@@ -32,7 +32,7 @@ function Diary() {
             author: "admin",
         };
         try {
-            const response = await axiosInstance.post('http://127.0.0.1:7001/diary/create_diary', {
+            const response = await axiosInstance.post('/diary/create_diary', {
                 title: diaryTitle,
                 content: diaryContent,
                 createdAt: selectedDate,
@@ -51,11 +51,15 @@ function Diary() {
 
     const getDiaries = async () => {
         try {
-            const response = await axiosInstance.get('http://127.0.0.1:7001/diary/show_diary', {
-                params: {
-                    author: "admin", // 传递当前用户
-                    createdAt: selectedDate, // 传递选定日期
-                },
+// <<<<<<< HEAD
+//             const response = await axiosInstance.get('http://127.0.0.1:7001/diary/show_diary', {
+//                 params: {
+//                     author: "admin", // 传递当前用户
+//                     createdAt: selectedDate, // 传递选定日期
+//                 },
+// =======
+            const response = await axiosInstance.get('/diary/show_diary', {
+// >>>>>>> ea7a9ba1f66b2a304803186c9c2233362254ffab
                 headers: {
                     Authorization: `Bearer ${'admin'}`,
                 },

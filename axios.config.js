@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 创建axios实例
 const axiosInstance = axios.create({
-    baseURL: 'http://127.0.0.1:7001', // 设置基础URL
+    baseURL: 'http://106.14.201.119:7001', // 设置基础URL
 });
 
 // 设置请求拦截器

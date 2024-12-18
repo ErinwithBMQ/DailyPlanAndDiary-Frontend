@@ -22,43 +22,111 @@
     width: fit-content;
 }
 
-.plan-creation-container {
-    display: block;
-    justify-content: right;
+.plan-container {
+    display: flex;
+    justify-content: center;
     align-items: flex-start;
     width: 80%;
-    margin-top: 60px;
+    margin-top: 20px;
 }
 
-.plan-list-container {
-    display: block;
-    margin-top: 100px;
-    position: absolute;
-    top: 268px;
-    left: 100px;
-    width: 80%;
-}
-
-.plan-list {
+.plan-list, .plan-creation {
     background-color: white;
-    position: relative;
-    margin-left: 200px;
-    margin-top: -270px;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 30%;
-    max-height: 400px; /* 固定高度 */
-    overflow-y: auto; /* 添加垂直滚动条 */
+    margin: 10px;
+    width: 45%;
+    border: 1px solid #ddd;
 }
 
-.plan-details {
-    background-color: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 45%;
-    margin-left: 20px;
+.plan-list {
+    order: 1;
+}
+
+.plan-list-content {
+    max-height: 450px;
+    overflow-y: auto; 
+}
+
+.plan-creation {
+    order: 2;
+    width: 50%;
+}
+
+.plan-title {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid #ffcbc1;
+    padding-bottom: 10px;
+}
+
+.title-input-container, .ddl-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.title-counter, .ddl-counter {
+    margin-left: 10px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border: 1px solid black;
+}
+
+.plan-content-textarea {
+    height: 200px; /* 调整文本框的高度 */
+}
+.emergency-input-container {
+    width: 100%;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.creation-button,  .close-details-button {
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-color: #ff9f6b;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.creation-button:hover, .close-details-button:hover {
+    background-color: #ffc8bf;
+    transform: translateY(-3px);
+}
+.viewplan-button {
+    border: none;
+    border-radius: 10px;
+    padding: 6px 10px;
+    margin-top: 10px;
+    background-color: #bab1ff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.viewplan-button:hover {
+    background-color: #b8c5ff;
+    transform: translateY(-3px);
 }
 
 .plan-item {
@@ -68,6 +136,7 @@
     border-radius: 5px;
     background-color: #fff;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    border: 1px solid #ccc;
 }
 
 .plan-item:hover {
@@ -75,88 +144,29 @@
     transform: translateY(-3px);
 }
 
+.plan-content-container {
+    margin-top: 10px;
+    max-height: 300px;
+    overflow-y: auto; /* 添加垂直滚动条 */
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: relative; /* 确保子元素的定位 */
+}
+
+.plan-content-title {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+    z-index: 1; /* 确保在滚动内容上方 */
+}
+
 .plan-content {
     white-space: pre-wrap; /* 保留换行符 */
 }
 
-.plan-creation {
-    background-color: white;
-    margin-left: 700px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 45%;
-}
-.plan-title {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-}
-
-.title-input-container {
-    display: flex;
-    align-items: center;
-}
-
-.title-counter {
-    margin-left: 10px;
-    font-size: 0.9em;
-    color: #666;
-}
-
-.ddl-input-container {
-    display: flex;
-    align-items: center;
-}
-
-.ddl-counter {
-    margin-left: 10px;
-    font-size: 0.9em;
-    color: #666;
-}
-.emergency-input-container {
-    display: flex;
-    align-items: center;
+.error-message {
+    color: red;
     margin-bottom: 10px;
-}
-input, textarea, select {
-    width: 90%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: border-color 0.3s ease;
-}
-
-input:focus, textarea:focus, select:focus {
-    border-color: #b29c98;
-}
-
-.plan-content-textarea {
-    width: 90%;
-    height: 200px; /* 调整文本框的高度 */
-}
-.creation-button {
-    border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    background-color: #ff6347;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.creation-button:hover {
-    background-color: #e5533d;
-}
-.textarea {
-    width: 300px;
-    height: 40px;
-    padding: 5px 10px;
-    font-size: 16px;
-    margin-bottom: 4px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
 }
