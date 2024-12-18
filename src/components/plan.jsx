@@ -1,5 +1,5 @@
 import './css/plan.css'
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect} from 'react';
 import axiosInstance from "../../axios.config.js";
 import UserLogin from "./jwt.jsx";
 
@@ -11,7 +11,12 @@ function Plan() {
     const [plans, setPlans] = useState([]);
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [selectedDate, setSelectedDate] = useState("");
-
+    const EMERGENCY_LEVELS = {
+        1: "重要且紧急",
+        2: "重要不紧急",
+        3: "紧急不重要",
+        4: "不重要不紧急",
+    };
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const date = params.get('date');
@@ -27,13 +32,16 @@ function Plan() {
         const newPlan = {
             name: planName,
             content: planContent,
-            emergency,
-            ddl,
+            created_at: selectedDate,
+            importance:emergency,
+            deadLineTime:ddl,
+            author: "admin",
         };
         try {
             const response = await axiosInstance.post('http://127.0.0.1:7001/plan/create_plan', {
                 title: planName,
                 content: planContent,
+                createdAt: selectedDate,
                 importance: emergency,
                 deadLineTime: ddl,
                 author: "admin",
@@ -46,10 +54,10 @@ function Plan() {
         }
 
         getPlans();
-        setPlanName("");
-        setPlanContent("");
-        setEmergency("");
-        setDdl("");
+        // setPlanName("");
+        // setPlanContent("");
+        // setEmergency("");
+        // setDdl("");
     };
 
     const handlePlanNameChange = (e) => {
@@ -67,10 +75,17 @@ function Plan() {
     const handleViewPlan = (plan) => {
         setSelectedPlan(plan);
     };
-
+    const handleEmergencyChange = (e) => {
+        const value = parseInt(e.target.value, 10); // 将字符串转为整数
+        setEmergency(value); // 更新状态，存储整数形式
+    };
     const getPlans = async () => {
         try {
             const response = await axiosInstance.get('http://127.0.0.1:7001/plan/show_plan', {
+                params: {
+                    author: "admin", // 传递当前用户
+                    createdAt: selectedDate, // 传递选定日期
+                },
                 headers: {
                     Authorization: `Bearer ${'admin'}`,
                 },
@@ -84,8 +99,11 @@ function Plan() {
     };
 
     useEffect(() => {
-        getPlans();
-    }, []);
+        if (selectedDate) {
+            getPlans();
+        }
+
+    }, [selectedDate]);
 
     return (
         <div className="plan-page">
@@ -119,13 +137,14 @@ function Plan() {
                             id="emergency"
                             name="emergency"
                             value={emergency}
-                            onChange={(e) => setEmergency(e.target.value)}
+                            onChange={handleEmergencyChange}
                         >
                             <option value="">选择紧急程度</option>
-                            <option value="重要且紧急">重要且紧急</option>
-                            <option value="重要不紧急">重要不紧急</option>
-                            <option value="紧急不重要">紧急不重要</option>
-                            <option value="不重要不紧急">不重要不紧急</option>
+                            {Object.entries(EMERGENCY_LEVELS).map(([key, label]) => (
+                                <option key={key} value={key}>
+                                    {label}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <div className="ddl-input-container">
