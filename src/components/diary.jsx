@@ -31,7 +31,7 @@ function Diary() {
             author: "admin",
         };
         try {
-            const response = await axiosInstance.post('http://127.0.0.1:7001/diary/create_diary', {
+            const response = await axiosInstance.post('/diary/create_diary', {
                 title: diaryTitle,
                 content: diaryContent,
                 createdAt: new Date().toLocaleDateString(),
@@ -50,7 +50,7 @@ function Diary() {
 
     const getDiaries = async () => {
         try {
-            const response = await axiosInstance.get('http://127.0.0.1:7001/diary/show_diary', {
+            const response = await axiosInstance.get('/diary/show_diary', {
                 headers: {
                     Authorization: `Bearer ${'admin'}`,
                 },

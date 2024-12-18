@@ -18,7 +18,7 @@ function Plan() {
         setSelectedDate(date);
     }, []);
 
-    const handleCreatePlan = async() => {
+    const handleCreatePlan = async () => {
         if (!planName || !planContent || !emergency || !ddl) {
             alert("所有字段均为必填项！");
             return;
@@ -31,7 +31,7 @@ function Plan() {
             ddl,
         };
         try {
-            const response = await axiosInstance.post('http://127.0.0.1:7001/plan/create_plan', {
+            const response = await axiosInstance.post('/plan/create_plan', {
                 title: planName,
                 content: planContent,
                 importance: emergency,
@@ -40,7 +40,7 @@ function Plan() {
             });
             console.log("计划成功创建");
             alert('你已经成功创建计划!');
-        }catch (error) {
+        } catch (error) {
             console.error(error);
             alert('创建失败。出现问题。');
         }
@@ -74,7 +74,7 @@ function Plan() {
 
     const getPlans = async () => {
         try {
-            const response = await axiosInstance.get('http://127.0.0.1:7001/plan/show_plan', {
+            const response = await axiosInstance.get('/plan/show_plan', {
                 headers: {
                     Authorization: `Bearer ${'admin'}`,
                 },
@@ -93,7 +93,7 @@ function Plan() {
 
     return (
         <div className="plan-page">
-            <UserLogin />
+            <UserLogin/>
             <button className="backMain-button" onClick={() => window.location.href = `/calendar`}>返回</button>
             <div className="plan-selected-date">
                 Date: {selectedDate}
@@ -107,7 +107,8 @@ function Plan() {
                             plans.map((plan, index) => (
                                 <div key={index} className="plan-item">
                                     <p><strong>计划名称：</strong>{plan.name}</p>
-                                    <button className="viewplan-button" onClick={() => handleViewPlan(plan)}>查看详情</button>
+                                    <button className="viewplan-button" onClick={() => handleViewPlan(plan)}>查看详情
+                                    </button>
                                 </div>
                             ))
                         ) : (
@@ -156,10 +157,10 @@ function Plan() {
                                     onChange={(e) => setEmergency(e.target.value)}
                                 >
                                     <option value="">选择紧急程度</option>
-                                    <option value="重要且紧急">重要且紧急</option>
-                                    <option value="重要不紧急">重要不紧急</option>
-                                    <option value="紧急不重要">紧急不重要</option>
-                                    <option value="不重要不紧急">不重要不紧急</option>
+                                    <option value="0">重要且紧急</option>
+                                    <option value="1">重要不紧急</option>
+                                    <option value="2">紧急不重要</option>
+                                    <option value="3">不重要不紧急</option>
                                 </select>
                             </div>
                             <div className="ddl-input-container">
