@@ -62,6 +62,7 @@ function Menu() {
                     <li onClick={() => {
                         window.location.href = `/`;
                         localStorage.removeItem('token');
+                        localStorage.removeItem('username');
                     }}>退出登录
                     </li>
                 </ul>

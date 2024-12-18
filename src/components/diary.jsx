@@ -2,6 +2,8 @@ import './css/diary.css'
 import React, {useState, useEffect} from 'react';
 import axiosInstance from "../../axios.config.js";
 import UserLogin from "./jwt.jsx";
+import useUsername from "./useUsername.jsx";
+
 // import {s} from "vite/dist/node/types.d-aGj9QkWt.js";
 
 function Diary() {
@@ -12,6 +14,7 @@ function Diary() {
     const [selectedDiary, setSelectedDiary] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
     const [selectedDate, setSelectedDate] = useState("");
+    const username = useUsername();
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -29,14 +32,14 @@ function Diary() {
             title: diaryTitle,
             content: diaryContent,
             created_at: selectedDate,
-            author: "admin",
+            author: username,
         };
         try {
             const response = await axiosInstance.post('/diary/create_diary', {
                 title: diaryTitle,
                 content: diaryContent,
                 createdAt: selectedDate,
-                author: "admin",
+                author: username,
             });
             console.log("日记成功创建");
             alert('你已经成功创建日记!');
@@ -46,23 +49,16 @@ function Diary() {
         }
         // setDiaries([...diaries, newDiary]);
         setShowCreation(false);
-        getDiaries();
+        await getDiaries();
     };
 
     const getDiaries = async () => {
         try {
-// <<<<<<< HEAD
-//             const response = await axiosInstance.get('http://127.0.0.1:7001/diary/show_diary', {
-//                 params: {
-//                     author: "admin", // 传递当前用户
-//                     createdAt: selectedDate, // 传递选定日期
-//                 },
-// =======
+            console.log("username:", username);
             const response = await axiosInstance.get('/diary/show_diary', {
-// >>>>>>> ea7a9ba1f66b2a304803186c9c2233362254ffab
-                headers: {
-                    Authorization: `Bearer ${'admin'}`,
-                },
+                params: {
+                    author: username,
+                }
             });
             setDiaries(response.data);
         } catch (error) {
@@ -141,6 +137,8 @@ function Diary() {
                         <>
                             <h2 className="diary-title">日记详情</h2>
                             <p><strong>标题：</strong>{selectedDiary.title}</p>
+                            <p><strong>创建时间：</strong>{selectedDiary.createdAt}</p>
+                            <p><strong>作者：</strong>{selectedDiary.author}</p>
                             <div className="diary-content-container">
                                 <p className="diary-content-title"><strong>内容：</strong></p>
                                 <p className="diary-content">{selectedDiary.content}</p>
