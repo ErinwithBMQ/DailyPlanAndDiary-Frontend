@@ -2,6 +2,7 @@ import './css/diary.css'
 import React, {useState, useEffect} from 'react';
 import axiosInstance from "../../axios.config.js";
 import UserLogin from "./jwt.jsx";
+// import {s} from "vite/dist/node/types.d-aGj9QkWt.js";
 
 function Diary() {
     const [diaryTitle, setDiaryTitle] = useState("");
@@ -27,14 +28,14 @@ function Diary() {
         const newDiary = {
             title: diaryTitle,
             content: diaryContent,
-            created_at: new Date().toLocaleDateString(),
+            created_at: selectedDate,
             author: "admin",
         };
         try {
             const response = await axiosInstance.post('http://127.0.0.1:7001/diary/create_diary', {
                 title: diaryTitle,
                 content: diaryContent,
-                createdAt: new Date().toLocaleDateString(),
+                createdAt: selectedDate,
                 author: "admin",
             });
             console.log("日记成功创建");
@@ -51,6 +52,10 @@ function Diary() {
     const getDiaries = async () => {
         try {
             const response = await axiosInstance.get('http://127.0.0.1:7001/diary/show_diary', {
+                params: {
+                    author: "admin", // 传递当前用户
+                    createdAt: selectedDate, // 传递选定日期
+                },
                 headers: {
                     Authorization: `Bearer ${'admin'}`,
                 },
@@ -74,8 +79,10 @@ function Diary() {
     };
 
     useEffect(() => {
-        getDiaries();
-    }, []);
+        if (selectedDate) {
+            getDiaries();
+        }
+    }, [selectedDate]);
 
     return (
         <div className="diary-page">
