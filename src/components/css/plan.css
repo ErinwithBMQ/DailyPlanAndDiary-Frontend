@@ -46,7 +46,7 @@
 
 .plan-list-content {
     max-height: 450px;
-    overflow-y: auto; 
+    overflow-y: auto;
 }
 
 .plan-creation {
@@ -89,6 +89,7 @@ input:focus, textarea:focus {
 .plan-content-textarea {
     height: 200px; /* 调整文本框的高度 */
 }
+
 .emergency-input-container {
     width: 100%;
     align-items: center;
@@ -98,7 +99,7 @@ input:focus, textarea:focus {
     border-radius: 5px;
 }
 
-.creation-button,  .close-details-button {
+.creation-button, .close-details-button {
     border: none;
     border-radius: 4px;
     padding: 10px 20px;
@@ -114,6 +115,7 @@ input:focus, textarea:focus {
     background-color: #ffc8bf;
     transform: translateY(-3px);
 }
+
 .viewplan-button {
     border: none;
     border-radius: 10px;
@@ -124,6 +126,7 @@ input:focus, textarea:focus {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
 .viewplan-button:hover {
     background-color: #b8c5ff;
     transform: translateY(-3px);
@@ -169,4 +172,38 @@ input:focus, textarea:focus {
 .error-message {
     color: red;
     margin-bottom: 10px;
+}
+
+.done-button {
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-color: #c2d8ea;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.done-button:hover {
+    background-color: #d2e9ff;
+    transform: translateY(-3px);
+}
+
+.delete-button {
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-color: #ef3e44;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #f496ad;
+    transform: translateY(-3px);
 }

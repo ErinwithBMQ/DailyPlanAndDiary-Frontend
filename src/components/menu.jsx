@@ -16,48 +16,46 @@ function Menu() {
             });
 
     }, []);
+
+    const handleDataChoose = (path) => {
+        let date = localStorage.getItem('selectedDate');
+        window.location.href = `${path}?date=${date}`;
+    };
+
     return (
         <ul className="shell">
             <li className="button0">
-                <span>我的消息</span>
+                <span>开始创建</span>
                 <ul>
                     <li onClick={() => {
-
-                    }}>评论我的
+                        handleDataChoose(`/diary`)
+                    }}>创建日记
                     </li>
                     <li onClick={() => {
-
-                    }}>收到的赞
+                        handleDataChoose(`/plan`)
+                    }}>创建计划
                     </li>
                 </ul>
             </li>
             <li className="button0">
                 <span onClick={() => {
 
-                }}>我的帖子</span>
+                }}>日记总览</span>
             </li>
             <div className={"username-display"}>
                 Welcome, {username}
             </div>
             <li className="button0">
-                <span>我的互动</span>
-                <ul>
-                    <li onClick={() => {
+                <span onClick={() => {
 
-                    }}>我的点赞
-                    </li>
-                    <li onClick={() => {
-
-                    }}>我的评论
-                    </li>
-                </ul>
+                }}>个人信息</span>
             </li>
             <li className="button0">
-                <span>关于我</span>
+                <span>其他</span>
                 <ul>
                     <li onClick={() => {
 
-                    }}>个人信息
+                    }}>修改密码
                     </li>
                     <li onClick={() => {
                         window.location.href = `/`;

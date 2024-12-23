@@ -30,14 +30,6 @@ function Plan() {
             return;
         }
 
-        const newPlan = {
-            name: planName,
-            content: planContent,
-            created_at: selectedDate,
-            importance: emergency,
-            deadLineTime: ddl,
-            author: "admin",
-        };
         try {
             const response = await axiosInstance.post('/plan/create_plan', {
                 title: planName,
@@ -46,6 +38,7 @@ function Plan() {
                 importance: emergency,
                 deadLineTime: ddl,
                 author: username,
+                is_done: false
             });
             console.log("计划成功创建");
             alert('你已经成功创建计划!');
@@ -94,6 +87,39 @@ function Plan() {
         setSelectedPlan(null);
     };
 
+    const handleDone = async (id) => {
+        try {
+            const response = await axiosInstance.get('/plan/finish_plan',
+                {
+                    params: {
+                        id: id,
+                    },
+                });
+            console.log("计划成功完成");
+            alert('你已经完成了该计划!');
+            location.reload();
+        } catch (error) {
+            console.error(error);
+            alert('完成失败。出现问题。');
+        }
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await axiosInstance.get('/plan/delete_plan',
+                {
+                    params: {
+                        id: id,
+                    },
+                });
+            alert('你已删除该计划。');
+            location.reload();
+        } catch (error) {
+            console.error(error);
+            alert('完成失败。出现问题。');
+        }
+    };
+
     const getPlans = async () => {
         axiosInstance.get('/user/get_name')
             .then(response => {
@@ -125,69 +151,18 @@ function Plan() {
             <div className="plan-selected-date">
                 Date: {selectedDate}
             </div>
-            {/*<<<<<<< HEAD*/}
-            {/*            <div className="plan-creation-container">*/}
-            {/*                <div className="plan-creation">*/}
-            {/*                    <h2 className="plan-title">添加计划</h2>*/}
-            {/*                    <div className="title-input-container">*/}
-            {/*                        <input*/}
-            {/*                            type="text"*/}
-            {/*                            id="plan_name"*/}
-            {/*                            name="plan_name"*/}
-            {/*                            placeholder="计划名称"*/}
-            {/*                            value={planName}*/}
-            {/*                            onChange={handlePlanNameChange}*/}
-            {/*                        />*/}
-            {/*                        <span className="title-counter">{planName.length}/15</span>*/}
-            {/*                    </div>*/}
-            {/*                    <textarea*/}
-            {/*                        className="plan-content-textarea"*/}
-            {/*                        placeholder="计划内容"*/}
-            {/*                        value={planContent}*/}
-            {/*                        onChange={(e) => setPlanContent(e.target.value)}*/}
-            {/*                    />*/}
-            {/*                    <div className="emergency-input-container">*/}
-            {/*                        <select*/}
-            {/*                            id="emergency"*/}
-            {/*                            name="emergency"*/}
-            {/*                            value={emergency}*/}
-            {/*                            onChange={handleEmergencyChange}*/}
-            {/*                        >*/}
-            {/*                            <option value="">选择紧急程度</option>*/}
-            {/*                            {Object.entries(EMERGENCY_LEVELS).map(([key, label]) => (*/}
-            {/*                                <option key={key} value={key}>*/}
-            {/*                                    {label}*/}
-            {/*                                </option>*/}
-            {/*                            ))}*/}
-            {/*                        </select>*/}
-            {/*                    </div>*/}
-            {/*                    <div className="ddl-input-container">*/}
-            {/*                        <input*/}
-            {/*                            type="text"*/}
-            {/*                            id="ddl"*/}
-            {/*                            name="ddl"*/}
-            {/*                            placeholder="ddl"*/}
-            {/*                            value={ddl}*/}
-            {/*                            onChange={handleDdlChange}*/}
-            {/*                        />*/}
-            {/*                        <span className="ddl-counter">{ddl.length}/15</span>*/}
-            {/*                    </div>*/}
-            {/*                    <button className="creation-button" onClick={handleCreatePlan}>创建计划</button>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-
-            {/*            <div className="plan-list-container">*/}
-            {/*=======*/}
             <div className="plan-container">
-                {/*>>>>>>> ea7a9ba1f66b2a304803186c9c2233362254ffab*/}
                 <div className="plan-list">
                     <h2 className="plan-title">计划列表</h2>
-                    <button className="createPlan-button" onClick={() => setSelectedPlan(null)}>创建计划</button>
+                    {/*<button className="creation-button" onClick={() => setSelectedPlan(null)}>创建计划*/}
+                    {/*</button>*/}
                     <div className="plan-list-content">
                         {plans.length > 0 ? (
                             plans.map((plan, index) => (
                                 <div key={index} className="plan-item">
-                                    <p><strong>计划名称：</strong>{plan.name}</p>
+                                    <p className={"mb-2"}><strong>计划名称：</strong>{plan.title}</p>
+                                    <p className={"mb-2"}><strong>ddl：</strong>{plan.deadLineTime}</p>
+                                    <p><strong>是否完成：</strong>{plan.is_done ? "已完成" : "未完成"}</p>
                                     <button className="viewplan-button" onClick={() => handleViewPlan(plan)}>查看详情
                                     </button>
                                 </div>
@@ -201,13 +176,20 @@ function Plan() {
                     {selectedPlan ? (
                         <>
                             <h2 className="plan-title">计划详情</h2>
-                            <p><strong>计划名称：</strong>{selectedPlan.name}</p>
-                            <div className="plan-content-container">
+                            <p className={"mb-4"}><strong>计划名称：</strong>{selectedPlan.title}</p>
+                            <div className="plan-content-container mb-4">
                                 <p className="plan-content-title"><strong>计划内容：</strong></p>
                                 <p className="plan-content">{selectedPlan.content}</p>
                             </div>
-                            <p><strong>紧急程度：</strong>{selectedPlan.emergency}</p>
-                            <p><strong>DDL：</strong>{selectedPlan.ddl}</p>
+                            <p className={"mb-4"}><strong>紧急程度：</strong>{EMERGENCY_LEVELS[selectedPlan.importance]}
+                            </p>
+                            <p className={"mb-4"}><strong>DDL：</strong>{selectedPlan.deadLineTime}</p>
+                            <p className={"mb-4"}><strong>是否完成：</strong>{selectedPlan.is_done ? "已完成" : "未完成"}
+                            </p>
+                            <button className="done-button" onClick={() => handleDone(selectedPlan.id)}>我已完成
+                            </button>
+                            <button className="delete-button" onClick={() => handleDelete(selectedPlan.id)}>删除计划
+                            </button>
                             <button className="close-details-button" onClick={handleCloseDetails}>返回</button>
                         </>
                     ) : (
@@ -259,16 +241,6 @@ function Plan() {
                         </>
                     )}
                 </div>
-                {selectedPlan && (
-                    <div className="plan-details">
-                        <h2 className="plan-title">计划详情</h2>
-                        <p><strong>计划名称：</strong>{selectedPlan.title}</p>
-                        <p><strong>计划内容：</strong></p>
-                        <div className="plan-content">{selectedPlan.content}</div>
-                        <p><strong>紧急程度：</strong>{EMERGENCY_LEVELS[selectedPlan.importance]}</p>
-                        <p><strong>DDL：</strong>{selectedPlan.deadLineTime}</p>
-                    </div>
-                )}
             </div>
         </div>
     );

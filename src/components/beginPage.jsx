@@ -9,14 +9,14 @@ function BeginPage() {
                     <h1 className="site-title">Daily Plan And Diary</h1>
                 </div>
                 <div className="begin-button-container">
-                    
+
                     <button onClick={() => {
                         window.location.href = `/login`;
                     }}>登录/注册
                     </button>
                     <button onClick={() => {
                         window.location.href = `/calendar`;
-                    }}>使用指南
+                    }}>进入主页
                     </button>
                 </div>
             </div>

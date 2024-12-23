@@ -15,6 +15,7 @@ function calendar() {
             format: 'YYYY-MM-DD',
             onSelect: () => {
                 setDate(picker.toString());
+                localStorage.setItem('selectedDate', picker.toString());
             }
         });
 
@@ -22,6 +23,8 @@ function calendar() {
         const today = new Date();
         picker.setDate(today);
         setDate(picker.toString());
+
+        localStorage.setItem('selectedDate', picker.toString());
 
         return () => {
             picker.destroy();
