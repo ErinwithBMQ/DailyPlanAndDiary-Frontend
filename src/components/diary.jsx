@@ -14,7 +14,9 @@ function Diary() {
     const [selectedDiary, setSelectedDiary] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
     const [selectedDate, setSelectedDate] = useState("");
-    const username = useUsername();
+    const [file, setFile] = useState(null);
+
+    const [username, setUsername] = useState("");
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -22,17 +24,46 @@ function Diary() {
         setSelectedDate(date);
     }, []);
 
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    };
+
     const handleCreateDiary = async () => {
         if (!diaryTitle || !diaryContent) {
             setErrorMessage("标题或内容不能为空，创建日记失败");
             return;
         }
 
+        const formData = new FormData();
+        if (file) {
+            formData.append('file', file);
+        }
+
+        let image_id = 0;
+
+        try {
+            if (file) {
+                const response = await axiosInstance.post('/file/upload', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+                image_id = response.data;
+                console.log('图片上传成功');
+            } else {
+                image_id = 0;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
+
         const newDiary = {
             title: diaryTitle,
             content: diaryContent,
             created_at: selectedDate,
             author: username,
+            image_id: image_id,
         };
         try {
             const response = await axiosInstance.post('/diary/create_diary', {
@@ -40,6 +71,7 @@ function Diary() {
                 content: diaryContent,
                 createdAt: selectedDate,
                 author: username,
+                image_id: image_id,
             });
             console.log("日记成功创建");
             alert('你已经成功创建日记!');
@@ -53,18 +85,27 @@ function Diary() {
     };
 
     const getDiaries = async () => {
-        try {
-            console.log("username:", username);
-            const response = await axiosInstance.get('/diary/show_diary', {
-                params: {
-                    author: username,
-                }
+        axiosInstance.get('/user/get_name')
+            .then(response => {
+                const newName = response.data.username;
+                setUsername(newName);
+                console.log("new", newName);
+
+                return axiosInstance.get('/diary/show_diary',
+                    {
+                        params: {
+                            author: newName,
+                            createdAt: selectedDate
+                        }
+                    });
+            })
+            .then(response => {
+                setDiaries(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+                alert('获取日记失败。出现问题。');
             });
-            setDiaries(response.data);
-        } catch (error) {
-            console.error(error);
-            alert('获取日记失败。出现问题。');
-        }
     };
 
     const handleViewDiary = (diary) => {
@@ -131,6 +172,14 @@ function Diary() {
                                 value={diaryContent}
                                 onChange={(e) => setDiaryContent(e.target.value)}
                             />
+                            <div className="flex mb-1">
+                                <input
+                                    type="file"
+                                    onChange={handleFileChange}
+                                    className="pb-4"
+                                />
+                                <div className="text-blue-300 ml-4">上传帖子图片（可不上传）</div>
+                            </div>
                             <button className="createDiary2-button" onClick={handleCreateDiary}>创建日记</button>
                         </>
                     ) : selectedDiary ? (
@@ -141,7 +190,12 @@ function Diary() {
                             <p><strong>作者：</strong>{selectedDiary.author}</p>
                             <div className="diary-content-container">
                                 <p className="diary-content-title"><strong>内容：</strong></p>
-                                <p className="diary-content">{selectedDiary.content}</p>
+                                <p className="diary-content mb-4">{selectedDiary.content}</p>
+                                {selectedDiary.image_id !== 0 && <div className={"mb-4"}>
+                                    <img src={`http://127.0.0.1:7001/file/show?id=${selectedDiary.image_id}`}
+                                         alt="xqq image"
+                                         className="image-responsive0"/>
+                                </div>}
                             </div>
                         </>
                     ) : (

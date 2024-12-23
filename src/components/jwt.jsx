@@ -12,7 +12,7 @@ const UserLogin = () => {
                 console.log('身份校验成功');
                 console.log(response.data);
                 setUsername(response.data.username);
-                localStorage.setItem('user', username);
+                localStorage.setItem('username', username);
                 return response.data;
             } catch (error) {
                 console.error('Error:', error);

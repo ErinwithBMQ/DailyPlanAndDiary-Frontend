@@ -11,11 +11,12 @@ function Plan() {
     const [plans, setPlans] = useState([]);
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [selectedDate, setSelectedDate] = useState("");
+    const [username, setUsername] = useState("");
     const EMERGENCY_LEVELS = {
-        1: "重要且紧急",
-        2: "重要不紧急",
-        3: "紧急不重要",
-        4: "不重要不紧急",
+        "0": "重要且紧急",
+        "1": "重要不紧急",
+        "2": "紧急不重要",
+        "3": "不重要不紧急",
     };
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -33,8 +34,8 @@ function Plan() {
             name: planName,
             content: planContent,
             created_at: selectedDate,
-            importance:emergency,
-            deadLineTime:ddl,
+            importance: emergency,
+            deadLineTime: ddl,
             author: "admin",
         };
         try {
@@ -44,7 +45,7 @@ function Plan() {
                 createdAt: selectedDate,
                 importance: emergency,
                 deadLineTime: ddl,
-                author: "admin",
+                author: username,
             });
             console.log("计划成功创建");
             alert('你已经成功创建计划!');
@@ -94,19 +95,20 @@ function Plan() {
     };
 
     const getPlans = async () => {
-        try {
-            const response = await axiosInstance.get('/plan/show_plan', {
-// >>>>>>> ea7a9ba1f66b2a304803186c9c2233362254ffab
-                headers: {
-                    Authorization: `Bearer ${'admin'}`,
-                },
+        axiosInstance.get('/user/get_name')
+            .then(response => {
+                const newName = response.data.username;
+                console.log(newName);
+                setUsername(newName);
+                return axiosInstance.get('/plan/show_plan', {params: {author: newName}});
+            })
+            .then(response => {
+                setPlans(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+                alert('获取日记失败。出现问题。');
             });
-            console.log(response.data);
-            setPlans(response.data);
-        } catch (error) {
-            console.error(error);
-            alert('获取日记失败。出现问题。');
-        }
     };
 
     useEffect(() => {
@@ -123,61 +125,61 @@ function Plan() {
             <div className="plan-selected-date">
                 Date: {selectedDate}
             </div>
-{/*<<<<<<< HEAD*/}
-{/*            <div className="plan-creation-container">*/}
-{/*                <div className="plan-creation">*/}
-{/*                    <h2 className="plan-title">添加计划</h2>*/}
-{/*                    <div className="title-input-container">*/}
-{/*                        <input*/}
-{/*                            type="text"*/}
-{/*                            id="plan_name"*/}
-{/*                            name="plan_name"*/}
-{/*                            placeholder="计划名称"*/}
-{/*                            value={planName}*/}
-{/*                            onChange={handlePlanNameChange}*/}
-{/*                        />*/}
-{/*                        <span className="title-counter">{planName.length}/15</span>*/}
-{/*                    </div>*/}
-{/*                    <textarea*/}
-{/*                        className="plan-content-textarea"*/}
-{/*                        placeholder="计划内容"*/}
-{/*                        value={planContent}*/}
-{/*                        onChange={(e) => setPlanContent(e.target.value)}*/}
-{/*                    />*/}
-{/*                    <div className="emergency-input-container">*/}
-{/*                        <select*/}
-{/*                            id="emergency"*/}
-{/*                            name="emergency"*/}
-{/*                            value={emergency}*/}
-{/*                            onChange={handleEmergencyChange}*/}
-{/*                        >*/}
-{/*                            <option value="">选择紧急程度</option>*/}
-{/*                            {Object.entries(EMERGENCY_LEVELS).map(([key, label]) => (*/}
-{/*                                <option key={key} value={key}>*/}
-{/*                                    {label}*/}
-{/*                                </option>*/}
-{/*                            ))}*/}
-{/*                        </select>*/}
-{/*                    </div>*/}
-{/*                    <div className="ddl-input-container">*/}
-{/*                        <input*/}
-{/*                            type="text"*/}
-{/*                            id="ddl"*/}
-{/*                            name="ddl"*/}
-{/*                            placeholder="ddl"*/}
-{/*                            value={ddl}*/}
-{/*                            onChange={handleDdlChange}*/}
-{/*                        />*/}
-{/*                        <span className="ddl-counter">{ddl.length}/15</span>*/}
-{/*                    </div>*/}
-{/*                    <button className="creation-button" onClick={handleCreatePlan}>创建计划</button>*/}
-{/*                </div>*/}
-{/*            </div>*/}
+            {/*<<<<<<< HEAD*/}
+            {/*            <div className="plan-creation-container">*/}
+            {/*                <div className="plan-creation">*/}
+            {/*                    <h2 className="plan-title">添加计划</h2>*/}
+            {/*                    <div className="title-input-container">*/}
+            {/*                        <input*/}
+            {/*                            type="text"*/}
+            {/*                            id="plan_name"*/}
+            {/*                            name="plan_name"*/}
+            {/*                            placeholder="计划名称"*/}
+            {/*                            value={planName}*/}
+            {/*                            onChange={handlePlanNameChange}*/}
+            {/*                        />*/}
+            {/*                        <span className="title-counter">{planName.length}/15</span>*/}
+            {/*                    </div>*/}
+            {/*                    <textarea*/}
+            {/*                        className="plan-content-textarea"*/}
+            {/*                        placeholder="计划内容"*/}
+            {/*                        value={planContent}*/}
+            {/*                        onChange={(e) => setPlanContent(e.target.value)}*/}
+            {/*                    />*/}
+            {/*                    <div className="emergency-input-container">*/}
+            {/*                        <select*/}
+            {/*                            id="emergency"*/}
+            {/*                            name="emergency"*/}
+            {/*                            value={emergency}*/}
+            {/*                            onChange={handleEmergencyChange}*/}
+            {/*                        >*/}
+            {/*                            <option value="">选择紧急程度</option>*/}
+            {/*                            {Object.entries(EMERGENCY_LEVELS).map(([key, label]) => (*/}
+            {/*                                <option key={key} value={key}>*/}
+            {/*                                    {label}*/}
+            {/*                                </option>*/}
+            {/*                            ))}*/}
+            {/*                        </select>*/}
+            {/*                    </div>*/}
+            {/*                    <div className="ddl-input-container">*/}
+            {/*                        <input*/}
+            {/*                            type="text"*/}
+            {/*                            id="ddl"*/}
+            {/*                            name="ddl"*/}
+            {/*                            placeholder="ddl"*/}
+            {/*                            value={ddl}*/}
+            {/*                            onChange={handleDdlChange}*/}
+            {/*                        />*/}
+            {/*                        <span className="ddl-counter">{ddl.length}/15</span>*/}
+            {/*                    </div>*/}
+            {/*                    <button className="creation-button" onClick={handleCreatePlan}>创建计划</button>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
 
-{/*            <div className="plan-list-container">*/}
-{/*=======*/}
+            {/*            <div className="plan-list-container">*/}
+            {/*=======*/}
             <div className="plan-container">
-{/*>>>>>>> ea7a9ba1f66b2a304803186c9c2233362254ffab*/}
+                {/*>>>>>>> ea7a9ba1f66b2a304803186c9c2233362254ffab*/}
                 <div className="plan-list">
                     <h2 className="plan-title">计划列表</h2>
                     <button className="createPlan-button" onClick={() => setSelectedPlan(null)}>创建计划</button>
@@ -247,7 +249,7 @@ function Plan() {
                                     type="text"
                                     id="ddl"
                                     name="ddl"
-                                    placeholder="ddl"
+                                    placeholder="ddl，输入格式为[年.月.日]"
                                     value={ddl}
                                     onChange={handleDdlChange}
                                 />
@@ -263,7 +265,7 @@ function Plan() {
                         <p><strong>计划名称：</strong>{selectedPlan.title}</p>
                         <p><strong>计划内容：</strong></p>
                         <div className="plan-content">{selectedPlan.content}</div>
-                        <p><strong>紧急程度：</strong>{selectedPlan.importance}</p>
+                        <p><strong>紧急程度：</strong>{EMERGENCY_LEVELS[selectedPlan.importance]}</p>
                         <p><strong>DDL：</strong>{selectedPlan.deadLineTime}</p>
                     </div>
                 )}

@@ -65,7 +65,7 @@
 
 .diary-list-content {
     max-height: 450px;
-    overflow-y: auto; 
+    overflow-y: auto;
 }
 
 .diary-creation {
@@ -106,10 +106,10 @@ input:focus, textarea:focus {
 }
 
 .diary-content-textarea {
-    height: 400px; /* 调整文本框的高度 */
+    height: 300px; /* 调整文本框的高度 */
 }
 
-.createDiary2-button{
+.createDiary2-button {
     border: none;
     border-radius: 10px;
     padding: 10px 20px;
@@ -120,12 +120,13 @@ input:focus, textarea:focus {
     margin-left: 10px;
     border: 1px solid #ccc;
 }
-.createDiary2-button:hover{
+
+.createDiary2-button:hover {
     background-color: #df9879;
     transform: translateY(-3px);
 }
 
-.createDiary-button{
+.createDiary-button {
     border: none;
     border-radius: 10px;
     padding: 10px 20px;
@@ -136,7 +137,8 @@ input:focus, textarea:focus {
     margin-bottom: 10px;
     border: 1px solid #ccc;
 }
-.createDiary-button:hover{
+
+.createDiary-button:hover {
     background-color: #c8b4e7;
     transform: translateY(-3px);
 }
@@ -152,6 +154,7 @@ input:focus, textarea:focus {
     margin-top: 10px;
     border: 1px solid #ccc;
 }
+
 .view-button:hover {
     background-color: #ffacac;
     transform: translateY(-3px);
@@ -197,4 +200,9 @@ input:focus, textarea:focus {
 .error-message {
     color: red;
     margin-bottom: 10px;
+}
+
+.image-responsive0 {
+    max-width: 60%;
+    height: auto;
 }
