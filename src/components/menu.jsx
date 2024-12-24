@@ -56,7 +56,7 @@ function Menu() {
                 <span>关于我</span>
                 <ul>
                     <li onClick={() => {
-
+                        window.location.href = `/individualInfo`;
                     }}>个人信息
                     </li>
                     <li onClick={() => {

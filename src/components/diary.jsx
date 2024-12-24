@@ -49,6 +49,7 @@ function Diary() {
     };
 
     const getDiaries = async () => {
+        console.log(selectedDate);
         try {
             const response = await axiosInstance.get('http://127.0.0.1:7001/diary/show_diary', {
                 headers: {

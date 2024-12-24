@@ -4,6 +4,7 @@ import Login from "./components/login.jsx";
 import Diary from "./components/diary.jsx";
 import Calendar from "./components/calendar.jsx";
 import Plan from "./components/plan.jsx";
+import IndividualInfo from './components/individualInfo.jsx';
 
 // 动态路由
 
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/diary" element={<Diary/>}/>
                 <Route path="/calendar" element={<Calendar/>}/>
                 <Route path="/plan" element={<Plan/>}/>
+                <Route path="/individualInfo" element={<IndividualInfo/>}/>
 
             </Routes>
         </Router>
