@@ -1,11 +1,17 @@
-.all-diary-page {
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     background: linear-gradient(to right, #d2d5ff, rgb(255, 211, 176));
+}
+
+.all-diary-page {
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     padding: 20px;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .all-diary-item {
