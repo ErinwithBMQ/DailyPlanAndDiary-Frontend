@@ -39,7 +39,7 @@ function Menu() {
             </li>
             <li className="button0">
                 <span onClick={() => {
-
+                    window.location.href = `/alldiary`;
                 }}>日记总览</span>
             </li>
             <div className={"username-display"}>
@@ -47,14 +47,14 @@ function Menu() {
             </div>
             <li className="button0">
                 <span onClick={() => {
-
+                    window.location.href = `/message`;
                 }}>个人信息</span>
             </li>
             <li className="button0">
                 <span>其他</span>
                 <ul>
                     <li onClick={() => {
-
+                        window.location.href = `/updatepsw`;
                     }}>修改密码
                     </li>
                     <li onClick={() => {

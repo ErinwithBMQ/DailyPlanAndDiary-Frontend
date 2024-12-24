@@ -2,7 +2,6 @@ import './css/diary.css'
 import React, {useState, useEffect} from 'react';
 import axiosInstance from "../../axios.config.js";
 import UserLogin from "./jwt.jsx";
-import useUsername from "./useUsername.jsx";
 
 // import {s} from "vite/dist/node/types.d-aGj9QkWt.js";
 
@@ -190,10 +189,10 @@ function Diary() {
                             <p><strong>作者：</strong>{selectedDiary.author}</p>
                             <div className="diary-content-container">
                                 <p className="diary-content-title"><strong>内容：</strong></p>
-                                <p className="diary-content mb-4">{selectedDiary.content}</p>
+                                <p className="diary-content mb-4 mt-2">{selectedDiary.content}</p>
                                 {selectedDiary.image_id !== 0 && <div className={"mb-4"}>
-                                    <img src={`http://127.0.0.1:7001/file/show?id=${selectedDiary.image_id}`}
-                                         alt="xqq image"
+                                    <img src={`http://106.14.201.119:7001/file/show?id=${selectedDiary.image_id}`}
+                                         alt="image"
                                          className="image-responsive0"/>
                                 </div>}
                             </div>
