@@ -1,5 +1,5 @@
 import './css/allDiary.css'
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axiosInstance from "../../axios.config.js";
 
 function AllDiary() {
@@ -15,7 +15,7 @@ function AllDiary() {
                 console.log("new", newName);
 
                 return axiosInstance.get('/diary/show_diary_by_name', {
-                    params: { author: newName },
+                    params: {author: newName},
                 });
             })
             .then(response => {
