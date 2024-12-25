@@ -26,7 +26,7 @@ function AllDiary() {
                 const sortedDates = Object.keys(groupedDiaries).sort((a, b) => {
                     const dateA = new Date(a);
                     const dateB = new Date(b);
-                    return dateA - dateB;
+                    return dateB - dateA;
                 });
 
                 setDiary(groupedDiaries);
