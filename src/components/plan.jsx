@@ -21,6 +21,7 @@ function Plan() {
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const date = params.get('date');
+        console.log("Selected date:", date);
         setSelectedDate(date);
     }, []);
 
