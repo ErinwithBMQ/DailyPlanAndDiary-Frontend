@@ -1,4 +1,4 @@
-import './css/allDiary.css'
+import './css/allDiary.css';
 import React, {useEffect, useState} from "react";
 import axiosInstance from "../../axios.config.js";
 
@@ -6,23 +6,20 @@ function AllDiary() {
     const [diary, setDiary] = useState([]);
     const [sortedDates, setSortedDates] = useState([]);
     const [username, setUsername] = useState('');
+    const [modalImage, setModalImage] = useState(null);
 
     useEffect(() => {
         axiosInstance.get('/user/get_name')
             .then(response => {
                 const newName = response.data.username;
                 setUsername(newName);
-                console.log("new", newName);
 
                 return axiosInstance.get('/diary/show_diary_by_name', {
                     params: {author: newName},
                 });
             })
             .then(response => {
-                // 按日期分组日记
                 const groupedDiaries = groupDiariesByDate(response.data);
-
-                // 获取排序后的日期
                 const sortedDates = Object.keys(groupedDiaries).sort((a, b) => {
                     const dateA = new Date(a);
                     const dateB = new Date(b);
@@ -38,16 +35,23 @@ function AllDiary() {
             });
     }, []);
 
-    // 按日期分组的函数
     const groupDiariesByDate = (diaries) => {
         return diaries.reduce((acc, diary) => {
-            const date = new Date(diary.createdAt).toLocaleDateString(); // 取日期部分（不包括时间）
+            const date = new Date(diary.createdAt).toLocaleDateString();
             if (!acc[date]) {
                 acc[date] = [];
             }
             acc[date].push(diary);
             return acc;
         }, {});
+    };
+
+    const openModal = (imageUrl) => {
+        setModalImage(imageUrl);
+    };
+
+    const closeModal = () => {
+        setModalImage(null);
     };
 
     return (
@@ -78,6 +82,7 @@ function AllDiary() {
                                                 src={`http://106.14.201.119:7001/file/show?id=${diaryItem.image_id}`}
                                                 alt="image"
                                                 className="image-responsive"
+                                                onClick={() => openModal(`http://106.14.201.119:7001/file/show?id=${diaryItem.image_id}`)}
                                             />
                                         </div>
                                     )}
@@ -88,6 +93,12 @@ function AllDiary() {
                 ))
             ) : (
                 <p>暂无日记</p>
+            )}
+
+            {modalImage && (
+                <div className="modal" onClick={closeModal}>
+                    <img src={modalImage} alt="Large view" />
+                </div>
             )}
         </div>
     );

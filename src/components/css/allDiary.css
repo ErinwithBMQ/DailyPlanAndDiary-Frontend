@@ -5,24 +5,80 @@ body, html {
     background: linear-gradient(to right, #d2d5ff, rgb(255, 211, 176));
 }
 
+.date-header {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 12px;
+}
+
 .all-diary-page {
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 24px;
     min-height: 100vh;
 }
 
 .all-diary-item {
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    padding: 1rem;
-    border-radius: 5px;
-    background-color: #fff;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 16px 0;
+    padding: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.all-diary-item p {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #333;
 }
 
 .image-responsive {
-    max-width: 60%;
-    height: auto;
+    display: block;
+    margin: 12px;
+    max-width: 100px;
+    max-height: 100px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
 }
+
+.image-responsive:hover {
+    border-color: #333333;
+}
+
+.all-diary-item img {
+    max-width: 150px;
+    max-height: 150px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.all-diary-item img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* 半透明背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal img {
+    max-width: 90%;
+    max-height: 90%; /* 放大图片的最大尺寸 */
+    border-radius: 8px;
+}
+

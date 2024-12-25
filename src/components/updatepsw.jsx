@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import UserLogin from "./jwt.jsx";
+import './css/updatepsw.css'
 import axiosInstance from "../../axios.config.js";
 
 function UpdatePsw() {
