@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import UserLogin from "./jwt.jsx";
 import './css/updatepsw.css'
+import './css/changepsw.css'
 import axiosInstance from "../../axios.config.js";
 
 function UpdatePsw() {
@@ -51,11 +52,10 @@ function UpdatePsw() {
             <button className="backMain-button" onClick={() => window.location.href = `/calendar`}>
                 返回
             </button>
-            <UserLogin/>
-            <div className="mt-24">
-
-                <h2 className={"text-center text-2xl font-bold mb-4"}>修改密码</h2>
-                <form onSubmit={handleSubmit}>
+            <UserLogin />
+            <div className="updatepsw-container">
+                <form className="updatepsw-form" onSubmit={handleSubmit}>
+                    <h2 className="center-text">修改密码</h2>
                     <div>
                         <label htmlFor="current-password">当前密码</label>
                         <input
