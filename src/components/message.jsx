@@ -67,7 +67,7 @@ function Message() {
                 <button className="backMain-button" onClick={() => window.location.href = `/calendar`}>
                     返回
                 </button>
-                <div className="bg-white content-center justify-center p-4 w-fit rounded shadow-amber-50 mt-24">
+                <div className="centered-box">
                     <div className="">
                         <div className="">
                             欢迎回来，{username}！

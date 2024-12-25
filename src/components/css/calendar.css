@@ -160,3 +160,7 @@
     border-color: #ffeacc;
     transform: translateY(-3px);
 }
+.check_plan {
+    position: relative;
+    margin-top: 20px;
+}
