@@ -16,17 +16,18 @@ function Weather() {
     }, [])
 
     return (
-        <div className="bg-white p-4 shadow-amber-50 rounded-2xl flex-col">
-            <div>
+        <div className="weather-container">
+            <div className="weather-title">今日天气</div>
+            <div className="weather-info">
                 城市：南京
             </div>
-            <div>
+            <div className="weather-info">
                 天气：{weather}
             </div>
-            <div>
+            <div className="weather-info">
                 温度：{temperature}
             </div>
-            <div>
+            <div className="weather-info">
                 更新时间：{time}
             </div>
         </div>

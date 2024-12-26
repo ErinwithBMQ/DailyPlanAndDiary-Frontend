@@ -1,16 +1,16 @@
-import React, {useEffect, useRef, useState} from 'react'
-import './css/calendar.css'
-import Pikaday from 'pikaday'
-import 'pikaday/css/pikaday.css'
+import React, { useEffect, useRef, useState } from 'react';
+import './css/calendar.css';
+import Pikaday from 'pikaday';
+import 'pikaday/css/pikaday.css';
 import Menu from "./menu.jsx";
 import axiosInstance from "../../axios.config.js";
 import Weather from "./weather.jsx";
 
-function calendar() {
-    const pikadayRef = useRef(null)
-    const [date, setDate] = useState('')
-    const [plan, setPlan] = useState([])
-    const [formattedDate, setFormattedDate] = useState('');
+function Calendar() {
+    const pikadayRef = useRef(null);
+    const [date, setDate] = useState('');
+    const [plan, setPlan] = useState([]);
+
     useEffect(() => {
         const picker = new Pikaday({
             field: pikadayRef.current,
@@ -47,24 +47,21 @@ function calendar() {
         axiosInstance.get('/user/get_name')
             .then(response => {
                 const newName = response.data.username;
-                console.log("new", newName);
 
-                return axiosInstance.get('/plan/find_ddl',
-                    {
-                        params: {
-                            author: newName,
-                        }
-                    });
+                return axiosInstance.get('/plan/find_ddl', {
+                    params: {
+                        author: newName,
+                    }
+                });
             })
             .then(response => {
                 setPlan(response.data);
-                console.log(response.data);
             })
             .catch(error => {
                 console.error(error);
                 alert('获取日记失败。出现问题。');
             });
-    }, [date])
+    }, [date]);
 
     return (
         <div className="calendar-page">
@@ -76,7 +73,7 @@ function calendar() {
             </div>
 
             {plan.length > 0 && (
-                <div>
+                <div className="plan-reminder">
                     你还有{plan.length}个计划未完成，赶快去完成吧！
                 </div>
             )}
@@ -85,10 +82,12 @@ function calendar() {
                 <button className="todiary-button" onClick={() => handleDataChoose(`/diary`)}>日记</button>
                 <button className="toplan-button" onClick={() => handleDataChoose(`/plan`)}>计划</button>
             </div>
-            <Menu/>
-            <Weather/>
+            <Menu />
+                <Weather />
+
+
         </div>
-    )
+    );
 }
 
-export default calendar
+export default Calendar;
