@@ -164,3 +164,46 @@
     position: relative;
     margin-top: 20px;
 }
+.weather-container {
+    position: fixed;
+    bottom: 110px;
+    right: 275px;
+    z-index: 1000;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)); /* 渐变背景 */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    max-width: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+.weather-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #b4c1ff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.weather-info {
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    background-color: transparent;
+}
+.plan-reminder {
+    position: fixed;
+    top: 320px;
+    right: 290px;
+    z-index: 1000;
+    font-weight: bold;
+    color: #FF5733;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
