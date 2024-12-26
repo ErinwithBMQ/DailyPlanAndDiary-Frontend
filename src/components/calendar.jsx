@@ -4,6 +4,7 @@ import Pikaday from 'pikaday'
 import 'pikaday/css/pikaday.css'
 import Menu from "./menu.jsx";
 import axiosInstance from "../../axios.config.js";
+import Weather from "./weather.jsx";
 
 function calendar() {
     const pikadayRef = useRef(null)
@@ -85,6 +86,7 @@ function calendar() {
                 <button className="toplan-button" onClick={() => handleDataChoose(`/plan`)}>计划</button>
             </div>
             <Menu/>
+            <Weather/>
         </div>
     )
 }

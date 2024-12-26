@@ -145,7 +145,7 @@ function Diary() {
                                 </div>
                             ))
                         ) : (
-                            <p>暂无日记，请创建！</p>
+                            <p>你这一天还没有日记哦，创建一个吧！</p>
                         )}
                     </div>
                 </div>
@@ -177,7 +177,7 @@ function Diary() {
                                     onChange={handleFileChange}
                                     className="pb-4"
                                 />
-                                <div className="text-blue-300 ml-4">上传帖子图片（可不上传）</div>
+                                <div className="text-blue-300 ml-4">上传图片（可不上传）</div>
                             </div>
                             <button className="createDiary2-button" onClick={handleCreateDiary}>创建日记</button>
                         </>
