@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './css/calendar.css';
 import Pikaday from 'pikaday';
 import 'pikaday/css/pikaday.css';
@@ -77,13 +77,18 @@ function Calendar() {
                     你还有{plan.length}个计划未完成，赶快去完成吧！
                 </div>
             )}
+            {plan.length === 0 && (
+                <div className="plan-reminder2">
+                    你目前没有未完成的计划，真棒！
+                </div>
+            )}
 
             <div className="tobutton-container">
                 <button className="todiary-button" onClick={() => handleDataChoose(`/diary`)}>日记</button>
                 <button className="toplan-button" onClick={() => handleDataChoose(`/plan`)}>计划</button>
             </div>
-            <Menu />
-                <Weather />
+            <Menu/>
+            <Weather/>
 
 
         </div>

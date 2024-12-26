@@ -203,6 +203,33 @@ input:focus, textarea:focus {
 }
 
 .image-responsive0 {
+    display: block;
+    margin: 12px;
     max-width: 60%;
-    height: auto;
+    border: 2px solid #ddd;
+    border-radius: 8px;
 }
+
+.image-responsive0:hover {
+    border-color: #333333;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* 半透明背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal img {
+    max-width: 90%;
+    max-height: 90%; /* 放大图片的最大尺寸 */
+    border-radius: 8px;
+}
+

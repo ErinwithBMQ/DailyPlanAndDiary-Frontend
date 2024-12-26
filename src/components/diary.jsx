@@ -14,6 +14,7 @@ function Diary() {
     const [errorMessage, setErrorMessage] = useState("");
     const [selectedDate, setSelectedDate] = useState("");
     const [file, setFile] = useState(null);
+    const [modalImage, setModalImage] = useState(null);
 
     const [username, setUsername] = useState("");
 
@@ -124,6 +125,30 @@ function Diary() {
         }
     }, [selectedDate]);
 
+    const openModal = (imageUrl) => {
+        setModalImage(imageUrl);
+    };
+
+    const closeModal = () => {
+        setModalImage(null);
+    };
+
+    const handleDeleteDiary = async (diaryId) => {
+        try {
+            const response = await axiosInstance.get('/diary/delete', {
+                params: {
+                    id: diaryId,
+                }
+            })
+            alert('你已删除该日记。');
+            getDiaries();
+            setShowCreation(true);
+        } catch (error) {
+            console.error(error);
+            alert('删除失败。出现问题。');
+        }
+    };
+
     return (
         <div className="diary-page">
             <UserLogin/>
@@ -193,15 +218,25 @@ function Diary() {
                                 {selectedDiary.image_id !== 0 && <div className={"mb-4"}>
                                     <img src={`http://106.14.201.119:7001/file/show?id=${selectedDiary.image_id}`}
                                          alt="image"
-                                         className="image-responsive0"/>
+                                         className="image-responsive0"
+                                         onClick={() => openModal(`http://106.14.201.119:7001/file/show?id=${selectedDiary.image_id}`)}/>
                                 </div>}
                             </div>
+                            <button className={"delete-button mt-6"}
+                                    onClick={() => handleDeleteDiary(selectedDiary.id)}>
+                                删除日记
+                            </button>
                         </>
                     ) : (
                         <p>请选择一个日记或创建一个新日记。</p>
                     )}
                 </div>
             </div>
+            {modalImage && (
+                <div className="modal" onClick={closeModal}>
+                    <img src={modalImage} alt="Large view"/>
+                </div>
+            )}
         </div>
     )
 }

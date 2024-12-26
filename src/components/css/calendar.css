@@ -131,6 +131,7 @@
     text-align: center;
     width: fit-content;
 }
+
 .tobutton-container {
     position: absolute;
     bottom: 300px;
@@ -155,15 +156,18 @@
     border-color: #ffeacc;
     transform: translateY(-3px);
 }
+
 .toplan-button:hover {
     background: linear-gradient(to right, #feb47b, #ff7e5f);
     border-color: #ffeacc;
     transform: translateY(-3px);
 }
+
 .check_plan {
     position: relative;
     margin-top: 20px;
 }
+
 .weather-container {
     position: fixed;
     bottom: 110px;
@@ -181,6 +185,7 @@
     align-items: center;
     overflow: hidden;
 }
+
 .weather-title {
     font-size: 18px;
     font-weight: bold;
@@ -195,6 +200,7 @@
     text-align: center;
     background-color: transparent;
 }
+
 .plan-reminder {
     position: fixed;
     top: 320px;
@@ -202,6 +208,19 @@
     z-index: 1000;
     font-weight: bold;
     color: #FF5733;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.plan-reminder2 {
+    position: fixed;
+    top: 320px;
+    right: 290px;
+    z-index: 1000;
+    font-weight: bold;
+    color: #838ec1;
     background-color: rgba(255, 255, 255, 0.7);
     padding: 10px 20px;
     border-radius: 10px;
