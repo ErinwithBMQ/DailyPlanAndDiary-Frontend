@@ -10,6 +10,7 @@ git clone 到本地后，先运行 `npm install`
 
 目前 axios 默认配置的是我部署在服务器上的后端地址。如需连接本地后端，请修改`axios.config.js`的`baseURL`，并且将
 `diary.jsx`和`allDiary,jsx`里图片url的前置地址改为本地地址。
+注：部署已下线
 
 ### 项目结构如下：
 
